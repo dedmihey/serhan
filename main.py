@@ -1,24 +1,13 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+from fastapi import FastAPI
+from routers import task
+from routers import user
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+app = FastAPI()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+@app.get('/')
+async def welcome():
+    return {"message": "Welcome to Taskmanager"}
 
-import howo
-howo.fun_1()
-howo.fun_2()
-
-
-
-
+app.include_router(task.router)
+app.include_router(user.router)
